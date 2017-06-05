@@ -8,28 +8,23 @@ function getAndPrintHTML () {
   };
 
   /* Add your code here */
-  // Step 2 buffer is when all data has been received so we  stop at end
-    // notice that https.get takes a callback with one parameter -
-    // response, which is a Stream that represents the HTTP response
+
     var stream = "";
     https.get(requestOptions, function (response) {
 
-    // set encoding of received data to UTF-8
     response.setEncoding('utf8');
 
-    // the callback is invoked when a `data` chunk is received
     response.on('data', function (data) {
       console.log('Chunk Received. Length:', data.length);
       stream += data;
     });
-    // the callback is invoked when an error occurs
+
     response.on('error', function (data) {
       console.error(error,message);
     });
 
 
-    // the callback is invoked when all of the data has been received
-    // (the `end` of the stream)
+    
     response.on('end', function() {
       console.log('Response stream complete.');
       console.log('\n buffer', stream);
